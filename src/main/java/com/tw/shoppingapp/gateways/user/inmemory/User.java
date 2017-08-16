@@ -3,6 +3,8 @@ package com.tw.shoppingapp.gateways.user.inmemory;
 import com.tw.shoppingapp.entities.UserEntity;
 
 import javax.persistence.*;
+import javax.validation.ConstraintViolationException;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -10,13 +12,27 @@ import java.util.Date;
 @Table(name = "user")
 public class User extends UserEntity implements Serializable {
 
+    @NotNull
     private String name;
+
+    @NotNull
     private String emailId;
+
+    @NotNull
     private String username;
+
+    @NotNull
     private String password;
+
+    @NotNull
     private String address;
+
+    @NotNull
     private String mobileNumber;
+
+    @NotNull
     private String type;
+
     private String gender;
     private Date dateOfBirth;
     private String panNumber;
@@ -179,12 +195,18 @@ public class User extends UserEntity implements Serializable {
 
         @Override
         public UserEntity.Builder name(String name) {
+            if (null == name || name.trim().length() == 0) {
+                throw new ConstraintViolationException("Field should not be null or empty", null);
+            }
             this.name = name;
             return this;
         }
 
         @Override
         public UserEntity.Builder emailId(String emailId) {
+            if (null == emailId || emailId.trim().length() == 0) {
+                throw new ConstraintViolationException("Field should not be null or empty", null);
+            }
             this.emailId = emailId;
             return this;
         }
@@ -215,6 +237,18 @@ public class User extends UserEntity implements Serializable {
 
         @Override
         public UserEntity.Builder type(String type) {
+            if (null == type || type.trim().length() == 0) {
+                throw new ConstraintViolationException("Field should not be null or empty", null);
+            }
+
+            switch (type.toLowerCase()) {
+                case BUYER:
+                case SELLER:
+                    break;
+                default:
+                    throw new IllegalArgumentException("Not a valid type of a user.User type should either be buyer or seller");
+            }
+
             this.type = type;
             return this;
         }

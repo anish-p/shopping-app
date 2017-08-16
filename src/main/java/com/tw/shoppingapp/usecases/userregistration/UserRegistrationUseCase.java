@@ -1,7 +1,7 @@
 package com.tw.shoppingapp.usecases.userregistration;
 
 import com.tw.shoppingapp.entities.UserEntity;
-import com.tw.shoppingapp.gateways.user.UserGateway;
+import com.tw.shoppingapp.gateways.UserGateway;
 import com.tw.shoppingapp.gateways.user.inmemory.User;
 import com.tw.shoppingapp.usecases.UseCase;
 

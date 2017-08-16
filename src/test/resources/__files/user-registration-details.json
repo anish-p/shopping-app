@@ -1,0 +1,14 @@
+{
+  "address": "Dummy-address",
+  "dateOfBirth": "2017-08-16T05:25:55.291Z",
+  "emailId": "test@gmail.com",
+  "experienceInMonths": 10,
+  "experienceInYears": 5,
+  "gender": "MALE",
+  "mobileNumber": "+91-9901156748",
+  "name": "Test User",
+  "panNumber": "BHBPP9876J",
+  "password": "test-password",
+  "type": "BUYER",
+  "username": "test-user"
+}

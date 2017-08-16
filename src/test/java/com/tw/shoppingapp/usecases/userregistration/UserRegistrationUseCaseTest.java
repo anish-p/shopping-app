@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -27,10 +27,29 @@ public class UserRegistrationUseCaseTest {
     public void givenValidUseCaseRequest_whenExecuted_ReturnSuccessfulResponse() {
         when(this.inMemoryUserGateway
                 .save(any(UserEntity.class)))
-                .thenReturn(new User.Builder().build());
+                .thenReturn(new User.Builder().name("Test name").build());
         final UserRegistrationUseCaseResponse userRegistrationUseCaseResponse = this.userRegistrationUseCase
-                .execute(new UserRegistrationUseCaseRequest());
+                .execute(getValidUserRegistrationUseCaseRequest());
         assertThat(userRegistrationUseCaseResponse.isRegistrationSuccessful, is(true));
     }
 
+    private UserRegistrationUseCaseRequest getValidUserRegistrationUseCaseRequest() {
+        UserRegistrationUseCaseRequest useCaseRequest = new UserRegistrationUseCaseRequest();
+        useCaseRequest.name = "Test name";
+        useCaseRequest.emailId = "test@gmail.com";
+        useCaseRequest.type = "buyer";
+        return useCaseRequest;
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void givenGatewayFails_whenExecuted_ThrowRuntimeException() {
+        this.userRegistrationUseCase
+                .execute(getInvalidUserRegistrationUseCaseRequest());
+    }
+
+    private UserRegistrationUseCaseRequest getInvalidUserRegistrationUseCaseRequest() {
+        UserRegistrationUseCaseRequest useCaseRequest = new UserRegistrationUseCaseRequest();
+        useCaseRequest.name = null;
+        return useCaseRequest;
+    }
 }

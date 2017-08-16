@@ -1,7 +1,7 @@
 package com.tw.shoppingapp.gateways.user.inmemory;
 
 import com.tw.shoppingapp.entities.UserEntity;
-import com.tw.shoppingapp.gateways.user.UserGateway;
+import com.tw.shoppingapp.gateways.UserGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class InMemoryUserGateway implements UserGateway {

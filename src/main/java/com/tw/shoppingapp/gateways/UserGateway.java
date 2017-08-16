@@ -1,7 +1,6 @@
-package com.tw.shoppingapp.gateways.user;
+package com.tw.shoppingapp.gateways;
 
 import com.tw.shoppingapp.entities.UserEntity;
-import com.tw.shoppingapp.gateways.user.inmemory.User;
 
 public interface UserGateway {
 

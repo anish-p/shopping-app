@@ -28,6 +28,14 @@ public abstract class UserEntity extends Entity {
 
     public abstract Integer getExpInMonths();
 
+    public static final String BUYER = "buyer";
+
+    public static final String SELLER = "seller";
+
+    public static final String MALE_GENDER = "male";
+
+    public static final String FEMALE_GENDER = "female";
+
     public interface Builder {
 
         Builder name(String name);
