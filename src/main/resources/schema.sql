@@ -16,3 +16,14 @@ CREATE TABLE user (
   exp_in_months INT(2),
   PRIMARY KEY (id)
 );
+
+CREATE TABLE product (
+  id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  name VARCHAR(100) NOT NULL,
+  description VARCHAR(200) NOT NULL,
+  price NUMBER(10, 2) NOT NULL,
+  image_url VARCHAR(500) NOT NULL,
+  available_quantity INT NOT NULL,
+  category VARCHAR(50) NOT NULL,
+  PRIMARY KEY (id)
+);
