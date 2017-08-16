@@ -1,9 +1,6 @@
 package com.tw.shoppingapp.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -16,12 +13,14 @@ public class Product implements Serializable{
     private double price;
     private String imageUrl;
     private int availableQuantity;
-    private String category;
+
+    @ManyToOne
+    private Category category;
 
     public Product() {
     }
 
-    public Product(String name, String description, double price, String imageUrl, int availableQuantity, String category) {
+    public Product(String name, String description, double price, String imageUrl, int availableQuantity, Category category) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -78,11 +77,11 @@ public class Product implements Serializable{
         this.availableQuantity = availableQuantity;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 

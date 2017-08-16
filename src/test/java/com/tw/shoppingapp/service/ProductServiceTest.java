@@ -1,5 +1,6 @@
 package com.tw.shoppingapp.service;
 
+import com.tw.shoppingapp.entity.Category;
 import com.tw.shoppingapp.entity.Product;
 import com.tw.shoppingapp.repository.ProductRepository;
 import org.junit.Test;
@@ -39,8 +40,8 @@ public class ProductServiceTest {
 
     @Test
     public void shouldCreateProduct() throws Exception {
-        Product product = new Product("Spectacles", "Awesome Spectacles", 10.2D, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLjO4vMxSkwHP4N9i-3FPsbBrJ4oBzYI97LMAHsebHAY_Q_WEL", 2, "Apparels");
-        Product productWithId = new Product("Spectacles", "Awesome Spectacles", 10.2D, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLjO4vMxSkwHP4N9i-3FPsbBrJ4oBzYI97LMAHsebHAY_Q_WEL", 2, "Apparels");
+        Product product = new Product("Spectacles", "Awesome Spectacles", 10.2D, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLjO4vMxSkwHP4N9i-3FPsbBrJ4oBzYI97LMAHsebHAY_Q_WEL", 2, new Category("Apparels"));
+        Product productWithId = new Product("Spectacles", "Awesome Spectacles", 10.2D, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLjO4vMxSkwHP4N9i-3FPsbBrJ4oBzYI97LMAHsebHAY_Q_WEL", 2, new Category("Apparels"));
         productWithId.setId(1);
         when(repository.save(product)).thenReturn(productWithId);
         Product createdProduct = service.createProduct(product);
@@ -49,7 +50,7 @@ public class ProductServiceTest {
 
     @Test
     public void shouldUpdateProductWhenProductExists() throws Exception {
-        Product product = new Product("Spectacles", "Awesome Spectacles", 10.2D, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLjO4vMxSkwHP4N9i-3FPsbBrJ4oBzYI97LMAHsebHAY_Q_WEL", 2, "Apparels");
+        Product product = new Product("Spectacles", "Awesome Spectacles", 10.2D, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLjO4vMxSkwHP4N9i-3FPsbBrJ4oBzYI97LMAHsebHAY_Q_WEL", 2, new Category("Apparels"));
         product.setId(1);
         when(repository.getOne(1L)).thenReturn(product);
         when(repository.save(product)).thenReturn(product);
@@ -59,7 +60,7 @@ public class ProductServiceTest {
 
     @Test(expected = EntityNotFoundException.class)
     public void shouldThrowExceptionWhenProductDoesNotExists() throws Exception {
-        Product product = new Product("Spectacles", "Awesome Spectacles", 10.2D, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLjO4vMxSkwHP4N9i-3FPsbBrJ4oBzYI97LMAHsebHAY_Q_WEL", 2, "Apparels");
+        Product product = new Product("Spectacles", "Awesome Spectacles", 10.2D, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLjO4vMxSkwHP4N9i-3FPsbBrJ4oBzYI97LMAHsebHAY_Q_WEL", 2, new Category("Apparels"));
         product.setId(1L);
         when(repository.getOne(1L)).thenReturn(null);
         service.updateProduct(product);
@@ -67,7 +68,7 @@ public class ProductServiceTest {
 
     @Test
     public void deleteProduct() throws Exception {
-        Product product = new Product("Spectacles", "Awesome Spectacles", 10.2D, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLjO4vMxSkwHP4N9i-3FPsbBrJ4oBzYI97LMAHsebHAY_Q_WEL", 2, "Apparels");
+        Product product = new Product("Spectacles", "Awesome Spectacles", 10.2D, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLjO4vMxSkwHP4N9i-3FPsbBrJ4oBzYI97LMAHsebHAY_Q_WEL", 2, new Category("Apparels"));
         product.setId(1L);
         when(repository.getOne(1L)).thenReturn(product);
         service.deleteProduct(1L);
@@ -75,7 +76,7 @@ public class ProductServiceTest {
 
     @Test(expected = EntityNotFoundException.class)
     public void shouldThrowExceptionWhenProductDoesNotExistsWhileDeletingTheproduct() throws Exception {
-        Product product = new Product("Spectacles", "Awesome Spectacles", 10.2D, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLjO4vMxSkwHP4N9i-3FPsbBrJ4oBzYI97LMAHsebHAY_Q_WEL", 2, "Apparels");
+        Product product = new Product("Spectacles", "Awesome Spectacles", 10.2D, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLjO4vMxSkwHP4N9i-3FPsbBrJ4oBzYI97LMAHsebHAY_Q_WEL", 2, new Category("Apparels"));
         product.setId(1L);
         when(repository.getOne(1L)).thenReturn(null);
         service.deleteProduct(1L);
@@ -83,8 +84,8 @@ public class ProductServiceTest {
 
     public List<Product> getProducts() {
         List<Product> products = new ArrayList<>();
-        products.add(new Product("Spectacles", "Awesome Spectacles", 10.2D, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLjO4vMxSkwHP4N9i-3FPsbBrJ4oBzYI97LMAHsebHAY_Q_WEL", 2, "Apparels"));
-        products.add(new Product("Shirt", "Awesome Shirt", 20.2D, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLjO4vMxSkwHP4N9i-3FPsbBrJ4oBzYI97LMAHsebHAY_Q_WEL", 2, "Apparels"));
+        products.add(new Product("Spectacles", "Awesome Spectacles", 10.2D, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLjO4vMxSkwHP4N9i-3FPsbBrJ4oBzYI97LMAHsebHAY_Q_WEL", 2, new Category("Apparels")));
+        products.add(new Product("Shirt", "Awesome Shirt", 20.2D, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLjO4vMxSkwHP4N9i-3FPsbBrJ4oBzYI97LMAHsebHAY_Q_WEL", 2, new Category("Apparels")));
         return products;
     }
 }

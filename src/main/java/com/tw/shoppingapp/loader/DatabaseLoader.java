@@ -1,41 +1,39 @@
-/*
- * Copyright 2015 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.tw.shoppingapp.loader;
 
+import com.tw.shoppingapp.entity.Category;
 import com.tw.shoppingapp.entity.Product;
+import com.tw.shoppingapp.repository.CategoryRepository;
 import com.tw.shoppingapp.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.stream.IntStream;
+
 @Component
 public class DatabaseLoader implements CommandLineRunner {
 
-	private final ProductRepository repository;
+    private final ProductRepository repository;
+    private final CategoryRepository categoryRepository;
 
-	@Autowired
-	public DatabaseLoader(ProductRepository repository) {
-		this.repository = repository;
-	}
+    @Autowired
+    public DatabaseLoader(ProductRepository repository, CategoryRepository categoryRepository) {
+        this.repository = repository;
+        this.categoryRepository = categoryRepository;
+    }
 
-	@Override
-	public void run(String... strings) throws Exception {
-		this.repository.save(new Product("Spectacles", "Awesome Spectacles", 10.2D, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLjO4vMxSkwHP4N9i-3FPsbBrJ4oBzYI97LMAHsebHAY_Q_WEL", 2, "Apparels"));
-		this.repository.save(new Product("Shirt", "Awesome Shirt", 20.2D, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLjO4vMxSkwHP4N9i-3FPsbBrJ4oBzYI97LMAHsebHAY_Q_WEL", 2, "Apparels"));
-		this.repository.save(new Product("Pants", "Awesome Pants", 30.2D, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLjO4vMxSkwHP4N9i-3FPsbBrJ4oBzYI97LMAHsebHAY_Q_WEL", 2, "Apparels"));
-		this.repository.save(new Product("Belt", "Awesome Belt", 40.2D, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLjO4vMxSkwHP4N9i-3FPsbBrJ4oBzYI97LMAHsebHAY_Q_WEL", 2, "Apparels"));
-	}
+    @Override
+    public void run(String... strings) throws Exception {
+        Category mobiles = categoryRepository.save(new Category("Mobiles"));
+        IntStream.range(1, 10).forEach(counter -> repository.save(new Product("Phone " + counter, "Android Smartphone", 300.2D + counter * 10, "https://s3.amazonaws.com/phoneradar/images/touchscreenico.jpg", counter, mobiles)));
+
+        Category electronics = categoryRepository.save(new Category("Electronics"));
+        IntStream.range(1, 10).forEach(counter -> repository.save(new Product("Camera " + counter, "Digital Camera", 150D + counter * 1.2, "https://s3.amazonaws.com/phoneradar/images/cameraico.jpg", counter, electronics)));
+
+        Category apparels = categoryRepository.save(new Category("Apparels"));
+        IntStream.range(1, 10).forEach(counter -> repository.save(new Product("Shirt " + counter, "Silk Shirt", 19.99D + counter * 1.8, "https://s3.amazonaws.com/phoneradar/images/cameraico.jpg", counter, apparels)));
+
+        Category household = categoryRepository.save(new Category("Household"));
+        IntStream.range(1, 10).forEach(counter -> repository.save(new Product("Sofa " + counter, "Italian Sofa", 219.99D + counter * 12, "https://s3.amazonaws.com/phoneradar/images/cameraico.jpg", counter, household)));
+    }
 }

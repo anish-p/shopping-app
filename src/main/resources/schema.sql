@@ -24,6 +24,12 @@ CREATE TABLE product (
   price NUMBER(10, 2) NOT NULL,
   image_url VARCHAR(500) NOT NULL,
   available_quantity INT NOT NULL,
-  category VARCHAR(50) NOT NULL,
+  category_id BIGINT(20) UNSIGNED NOT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE category (
+  id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  name VARCHAR(100) NOT NULL,
   PRIMARY KEY (id)
 );
