@@ -33,9 +33,9 @@ public class DatabaseLoader implements CommandLineRunner {
 
 	@Override
 	public void run(String... strings) throws Exception {
-		this.repository.save(new Product("Spectacles", "Awesome Spectacles", 10.2D, "/abc", 2, "Apparels"));
-		this.repository.save(new Product("Shirt", "Awesome Shirt", 20.2D, "/abc", 2, "Apparels"));
-		this.repository.save(new Product("Pants", "Awesome Pants", 30.2D, "/abc", 2, "Apparels"));
-		this.repository.save(new Product("Belt", "Awesome Belt", 40.2D, "/abc", 2, "Apparels"));
+		this.repository.save(new Product("Spectacles", "Awesome Spectacles", 10.2D, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLjO4vMxSkwHP4N9i-3FPsbBrJ4oBzYI97LMAHsebHAY_Q_WEL", 2, "Apparels"));
+		this.repository.save(new Product("Shirt", "Awesome Shirt", 20.2D, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLjO4vMxSkwHP4N9i-3FPsbBrJ4oBzYI97LMAHsebHAY_Q_WEL", 2, "Apparels"));
+		this.repository.save(new Product("Pants", "Awesome Pants", 30.2D, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLjO4vMxSkwHP4N9i-3FPsbBrJ4oBzYI97LMAHsebHAY_Q_WEL", 2, "Apparels"));
+		this.repository.save(new Product("Belt", "Awesome Belt", 40.2D, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLjO4vMxSkwHP4N9i-3FPsbBrJ4oBzYI97LMAHsebHAY_Q_WEL", 2, "Apparels"));
 	}
 }
