@@ -1,6 +1,5 @@
 package com.tw.shoppingapp;
 
-import com.tw.shoppingapp.gateways.UserGateway;
 import com.tw.shoppingapp.gateways.user.inmemory.InMemoryUserGateway;
 import com.tw.shoppingapp.usecases.userregistration.UserRegistrationUseCase;
 import org.h2.server.web.WebServlet;

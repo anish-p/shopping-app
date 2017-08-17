@@ -29,6 +29,15 @@ public class Product implements Serializable{
         this.category = category;
     }
 
+    public Product(Product product) {
+        this.name = product.getName();
+        this.description = product.getDescription();
+        this.price = product.getPrice();
+        this.imageUrl = product.getImageUrl();
+        this.availableQuantity = product.getAvailableQuantity();
+        this.category = product.getCategory();
+    }
+
     public long getId() {
         return id;
     }
