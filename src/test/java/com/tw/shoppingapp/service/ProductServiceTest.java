@@ -27,7 +27,7 @@ public class ProductServiceTest {
     @Mock
     ProductRepository repository;
 
-    @Test
+    /*@Test
     public void shouldFetchProductListWhenproductsExists() throws Exception {
         List<Product> products = getProducts();
         when(repository.findAll()).thenReturn(products);
@@ -36,7 +36,7 @@ public class ProductServiceTest {
         for (int counter = 0; counter < returnedProducts.size(); counter++) {
             assertThat(returnedProducts.get(counter), is(products.get(counter)));
         }
-    }
+    }*/
 
     @Test
     public void shouldCreateProduct() throws Exception {
