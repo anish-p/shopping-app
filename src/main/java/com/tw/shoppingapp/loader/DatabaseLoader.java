@@ -21,23 +21,29 @@ public class DatabaseLoader implements CommandLineRunner {
 
 	private final UserRepository userRepository;
 
+	private final CategoryRepository categoryRepository;
+
 	@Autowired
-	public DatabaseLoader(ProductRepository productRepository, UserRepository userRepository) {
+	public DatabaseLoader(ProductRepository productRepository, UserRepository userRepository, CategoryRepository categoryRepository) {
 		this.productRepository = productRepository;
+		this.categoryRepository = categoryRepository;
 		this.userRepository = userRepository;
 	}
 
 	@Override
 	public void run(String... strings) throws Exception {
-		this.productRepository.save(new Product("Spectacles", "Awesome Spectacles", 10.2D, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLjO4vMxSkwHP4N9i-3FPsbBrJ4oBzYI97LMAHsebHAY_Q_WEL", 2, "Apparels"));
-		this.productRepository.save(new Product("Shirt", "Awesome Shirt", 20.2D, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLjO4vMxSkwHP4N9i-3FPsbBrJ4oBzYI97LMAHsebHAY_Q_WEL", 2, "Apparels"));
-		this.productRepository.save(new Product("Pants", "Awesome Pants", 30.2D, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLjO4vMxSkwHP4N9i-3FPsbBrJ4oBzYI97LMAHsebHAY_Q_WEL", 2, "Apparels"));
-		this.productRepository.save(new Product("Belt", "Awesome Belt", 40.2D, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLjO4vMxSkwHP4N9i-3FPsbBrJ4oBzYI97LMAHsebHAY_Q_WEL", 2, "Apparels"));
+		Category mobiles = categoryRepository.save(new Category("Mobiles"));
+		IntStream.range(1, 10).forEach(counter -> productRepository.save(new Product("Phone " + counter, "Android Smartphone", 300.2D + counter * 10, "https://s3.amazonaws.com/phoneradar/images/touchscreenico.jpg", counter, mobiles)));
 
-		this.userRepository.save(new User("Someone1", "someone1@fsd.com", "hello1", "mypass1", "myaddress1", "8902342", "sometype", "M", new Date(), "myPan", 2, 2));
-		this.userRepository.save(new User("Someone2", "someone2@fsd.com", "hello2", "mypass2", "myaddress2", "8902342", "sometype", "F", new Date(), "myPan", 2, 2));
-		this.userRepository.save(new User("Someone3", "someone3@fsd.com", "hello3", "mypass3", "myaddress3", "8902342", "sometype", "F", new Date(), "myPan", 2, 2));
-		this.userRepository.save(new User("Someone4", "someone4@fsd.com", "hello4", "mypass4", "myaddress4", "8902342", "sometype", "M", new Date(), "myPan", 2, 2));
-		this.userRepository.save(new User("Someone5", "someone5@fsd.com", "hello5", "mypass5", "myaddress5", "8902342", "sometype", "M", new Date(), "myPan", 2, 2));
+		Category electronics = categoryRepository.save(new Category("Electronics"));
+		IntStream.range(1, 10).forEach(counter -> productRepository.save(new Product("Camera " + counter, "Digital Camera", 150D + counter * 1.2, "https://s3.amazonaws.com/phoneradar/images/cameraico.jpg", counter, electronics)));
+
+		Category apparels = categoryRepository.save(new Category("Apparels"));
+		IntStream.range(1, 10).forEach(counter -> productRepository.save(new Product("Shirt " + counter, "Silk Shirt", 19.99D + counter * 1.8, "https://s3.amazonaws.com/phoneradar/images/cameraico.jpg", counter, apparels)));
+
+		Category household = categoryRepository.save(new Category("Household"));
+		IntStream.range(1, 10).forEach(counter -> productRepository.save(new Product("Sofa " + counter, "Italian Sofa", 219.99D + counter * 12, "https://s3.amazonaws.com/phoneradar/images/cameraico.jpg", counter, household)));
+
+		IntStream.range(1, 6).forEach(counter -> userRepository.save(new User("Someone" + counter, "someone" + counter+ "@fsd.com", "hello" + counter, "mypass" + counter, "myaddress" + counter, "8902342", "sometype", "M", new Date(), "myPan", 2, 2)));
 	}
 }
