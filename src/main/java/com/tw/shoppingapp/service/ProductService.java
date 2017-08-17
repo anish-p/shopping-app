@@ -14,7 +14,7 @@ public class ProductService {
 
     @Autowired
     ProductRepository productRepository;
-    private int DEFAULT_PAGE_SIZE = 5;
+    private int DEFAULT_PAGE_SIZE = 20;
 
     public Page<Product> getProducts(int pageNumber) {
         return productRepository.findAll(PageRequest.of(pageNumber, DEFAULT_PAGE_SIZE));

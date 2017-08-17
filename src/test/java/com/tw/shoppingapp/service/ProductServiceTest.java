@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.data.domain.Page;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
@@ -29,14 +30,15 @@ public class ProductServiceTest {
 
     /*@Test
     public void shouldFetchProductListWhenproductsExists() throws Exception {
-        List<Product> products = getProducts();
+/*        Page<Product> products = getProducts();
         when(repository.findAll()).thenReturn(products);
-        List<Product> returnedProducts = service.getProducts();
+        Page<Product> returnedProducts = service.getProducts(0);
 
         for (int counter = 0; counter < returnedProducts.size(); counter++) {
             assertThat(returnedProducts.get(counter), is(products.get(counter)));
         }
     }*/
+
 
     @Test
     public void shouldCreateProduct() throws Exception {
