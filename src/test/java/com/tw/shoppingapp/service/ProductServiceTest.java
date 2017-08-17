@@ -9,6 +9,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
@@ -28,16 +30,16 @@ public class ProductServiceTest {
     @Mock
     ProductRepository repository;
 
-    /*@Test
+    @Test
     public void shouldFetchProductListWhenproductsExists() throws Exception {
-/*        Page<Product> products = getProducts();
-        when(repository.findAll()).thenReturn(products);
-        Page<Product> returnedProducts = service.getProducts(0);
+        Page<Product> products = getProducts();
+        when(repository.findByCategoryId(PageRequest.of(0, 20), 1L)).thenReturn(products);
+        Page<Product> returnedProducts = service.getProductsByCategory(0, 1L);
 
-        for (int counter = 0; counter < returnedProducts.size(); counter++) {
-            assertThat(returnedProducts.get(counter), is(products.get(counter)));
+        for (int counter = 0; counter < returnedProducts.getContent().size(); counter++) {
+            assertThat(returnedProducts.getContent().get(counter), is(products.getContent().get(counter)));
         }
-    }*/
+    }
 
 
     @Test
@@ -84,10 +86,11 @@ public class ProductServiceTest {
         service.deleteProduct(1L);
     }
 
-    public List<Product> getProducts() {
+    public Page<Product> getProducts() {
         List<Product> products = new ArrayList<>();
         products.add(new Product("Spectacles", "Awesome Spectacles", 10.2D, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLjO4vMxSkwHP4N9i-3FPsbBrJ4oBzYI97LMAHsebHAY_Q_WEL", 2, new Category("Apparels")));
         products.add(new Product("Shirt", "Awesome Shirt", 20.2D, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLjO4vMxSkwHP4N9i-3FPsbBrJ4oBzYI97LMAHsebHAY_Q_WEL", 2, new Category("Apparels")));
-        return products;
+        Page<Product> productPage = new PageImpl<>(products, PageRequest.of(0, 10), 50);
+        return productPage;
     }
 }
