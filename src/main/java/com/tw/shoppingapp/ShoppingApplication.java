@@ -1,7 +1,5 @@
 package com.tw.shoppingapp;
 
-import com.tw.shoppingapp.gateways.user.inmemory.InMemoryUserGateway;
-import com.tw.shoppingapp.usecases.userregistration.UserRegistrationUseCase;
 import org.h2.server.web.WebServlet;
 import org.h2.tools.Server;
 import org.springframework.boot.SpringApplication;
@@ -17,18 +15,6 @@ public class ShoppingApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ShoppingApplication.class, args);
-    }
-
-    @Bean
-    protected UserRegistrationUseCase userRegistrationUseCase() {
-        UserRegistrationUseCase userRegistrationUseCase = new UserRegistrationUseCase();
-        userRegistrationUseCase.setUserGateway(inMemoryGateway());
-        return userRegistrationUseCase;
-    }
-
-    @Bean
-    protected InMemoryUserGateway inMemoryGateway() {
-        return new InMemoryUserGateway();
     }
 
     @Bean

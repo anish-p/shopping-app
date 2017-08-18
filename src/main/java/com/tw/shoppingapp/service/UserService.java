@@ -1,7 +1,7 @@
 package com.tw.shoppingapp.service;
 
-import com.tw.shoppingapp.gateways.user.inmemory.User;
-import com.tw.shoppingapp.gateways.user.inmemory.UserRepository;
+import com.tw.shoppingapp.entity.User;
+import com.tw.shoppingapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +18,11 @@ public class UserService {
     }
 
     public List<User> getUsers() {
-        return (List<User>) userRepository.findAll();
+        return userRepository.findAll();
     }
+
+    public User createUser(User user) {
+        return userRepository.save(user);
+    }
+
 }
