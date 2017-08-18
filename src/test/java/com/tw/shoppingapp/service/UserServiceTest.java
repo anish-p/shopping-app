@@ -1,7 +1,7 @@
 package com.tw.shoppingapp.service;
 
-import com.tw.shoppingapp.gateways.user.inmemory.User;
-import com.tw.shoppingapp.gateways.user.inmemory.UserRepository;
+import com.tw.shoppingapp.entity.User;
+import com.tw.shoppingapp.repository.UserRepository;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
